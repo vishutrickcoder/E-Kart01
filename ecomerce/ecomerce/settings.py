@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     #install Apps
 
     'home',
+    'category',
+    'accounts',
 ]
 
 MIDDLEWARE = [
