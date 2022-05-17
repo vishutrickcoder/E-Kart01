@@ -23,7 +23,7 @@
 
 <!-- custom style -->
 <link href="{% static 'css/ui.css'%} " rel="stylesheet" type="text/css"/>
-<link href="css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+<link href="{% static 'css/responsive.css' %}"  rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
 <!-- custom javascript -->
 <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
@@ -152,78 +152,19 @@ $(document).ready(function() {
 
 	
 <div class="row">
+
+	{% for product in products %}
+
 	<div class="col-md-3">
 		<div class="card card-product-grid">
-			<a href="./product-detail.html" class="img-wrap"> <img src="{% static 'images/items/1.jpg' %}"> </a>
+			<a href="./product-detail.html" class="img-wrap"> <img src="{{product.images.url}}"> </a>
 			<figcaption class="info-wrap">
-				<a href="./product-detail.html" class="title">Just another product name</a>
-				<div class="price mt-1">$179.00</div> <!-- price-wrap.// -->
+				<a href="./product-detail.html" class="title"> {{ product.product_name}}</a>
+				<div class="price mt-1">₹ {{product.price}}</div> <!-- price-wrap.// -->
 			</figcaption>
 		</div>
 	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="./product-detail.html" class="img-wrap"> <img src="{% static 'images/items/2.jpg' %}"> </a>
-			<figcaption class="info-wrap">
-				<a href="./product-detail.html" class="title">Some item name here</a>
-				<div class="price mt-1">$280.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="./product-detail.html" class="img-wrap"> <img src="{% static 'images/items/3.jpg' %}"> </a>
-			<figcaption class="info-wrap">
-				<a href="./product-detail.html" class="title">Great product name here</a>
-				<div class="price mt-1">$56.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="./product-detail.html" class="img-wrap"> <img src="{% static 'images/items/4.jpg' %}"> </a>
-			<figcaption class="info-wrap">
-				<a href="./product-detail.html" class="title">Just another product name</a>
-				<div class="price mt-1">$179.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="./product-detail.html" class="img-wrap"> <img src="{% static 'images/items/5.jpg' %}"> </a>
-			<figcaption class="info-wrap">
-				<a href="./product-detail.html" class="title">Just another product name</a>
-				<div class="price mt-1">$179.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="./product-detail.html" class="img-wrap"> <img src="{% static 'images/items/6.jpg' %}"> </a>
-			<figcaption class="info-wrap">
-				<a href="./product-detail.html" class="title">Some item name here</a>
-				<div class="price mt-1">$280.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="./product-detail.html" class="img-wrap"> <img src="{% static 'images/items/7.jpg' %}"> </a>
-			<figcaption class="info-wrap">
-				<a href="./product-detail.html" class="title">Great product name here</a>
-				<div class="price mt-1">$56.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="./product-detail.html" class="img-wrap"> <img src="{% static 'images/items/9.jpg' %}"> </a>
-			<figcaption class="info-wrap">
-				<a href="./product-detail.html" class="title">Just another product name</a>
-				<div class="price mt-1">$179.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
+	{% endfor %}
 </div> <!-- row.// -->
 
 </div><!-- container // -->
@@ -241,9 +182,9 @@ $(document).ready(function() {
 				<p class="text-muted"> &copy 2019 Company name </p>
 			</div>
 			<div class="col-md-8 text-md-center">
-				<span  class="px-2">info@pixsellz.io</span>
+				<span  class="px-2">ecommerce001@gmail.co.in</span>
 				<span  class="px-2">+879-332-9375</span>
-				<span  class="px-2">Street name 123, Avanue abc</span>
+				<span  class="px-2">Street name 1</span>
 			</div>
 			<div class="col-md-2 text-md-right text-muted">
 				<i class="fab fa-lg fa-cc-visa"></i>

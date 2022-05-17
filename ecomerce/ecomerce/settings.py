@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'home',
     'category',
     'accounts',
+    'store' ,
 
     #Third party 
     'django_extensions',

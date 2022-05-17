@@ -1,10 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from store.models import Product
 # Create your views here.
 
 def home(request):
-    return render(request,'index.html')
+    product = Product.objects.filter(is_available=True)
+
+    context_data = {
+        "products" : product , 
+    }
+
+    return render(request,'index.html',context_data)
 
 
 def about(request):
