@@ -9,3 +9,9 @@ USE full Commands
 - "python manage.py migrate"
 - "python manage.py runserver"
 - "python manage.py shell_plus --print-sql"
+
+### TODO
+
+- Home page update [Assignment]
+- 'Add to cart' link update on store page [Done]
+- Showing Total Amount for each Product in cart

@@ -6,6 +6,13 @@
 <div class="container">
 
 <!-- ============================ COMPONENT 1 ================================= -->
+{% if not cart_items %}
+	<h2 class="text-center">Your shopping cart is empty</h2>
+	<br> 
+	<div class="text-center">
+		<a href="{% url 'ecom-store-home' %}" class="btn btn-primary">Continue shopping</a>
+	</div>
+{% else %}
 
 <div class="row">
 	<aside class="col-lg-9">
@@ -28,8 +35,8 @@
 		<figure class="itemside align-items-center">
 			<div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
 			<figcaption class="info">
-				<a href="#" class="title text-dark">{{ cart_item.product.product_name }}</a>
-				<p class="text-muted small">Color: 25 Mpx <br> Size: Canon</p>
+				<a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
+				{% comment %} <p class="text-muted small">Color: 25 Mpx <br> Size: Canon</p> {% endcomment %}
 			</figcaption>
 		</figure>
 	</td>
@@ -49,7 +56,7 @@
 	</td>
 	<td> 
 		<div class="price-wrap"> 
-			<var class="price">&#8377; {{ cart_item.sub_total }}</var> 
+			{% comment %} <var class="price">&#8377; {{ cart_item.total }}</var>  {% endcomment %}
 			<small class="text-muted"> &#8377; {{ cart_item.product.price }} each </small> 
 		</div> <!-- price-wrap .// -->
 	</td>
@@ -86,7 +93,7 @@
 				<img src="{% static './images/misc/payments.png' %}" height="26">
 			</p>
 			<a href="./place-order.html" class="btn btn-primary btn-block"> Checkout </a>
-			<a href="./store.html" class="btn btn-light btn-block">Continue Shopping</a>
+			<a href="{% url 'ecom-store-home' %}" class="btn btn-light btn-block">Continue Shopping</a>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
 
@@ -95,7 +102,7 @@
 
 </div> <!-- row.// -->
 <!-- ============================ COMPONENT 1 END .// ================================= -->
-
+{%endif %}
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->

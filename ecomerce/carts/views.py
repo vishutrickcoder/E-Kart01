@@ -4,15 +4,12 @@ from django.shortcuts import get_object_or_404, render, redirect
 from store.models import Product
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+from carts.utils import _cart_id
 
 # Create your views here.
 
 
-def _cart_id(request):
-    cart = request.session.session_key
-    if not cart:
-        cart = request.session.create()
-    return cart
+
 
 # adding quantity in a Cart 
 
@@ -49,6 +46,7 @@ def cart(request, total=0 , quantity=0 , cart_item=None):
     cart_items = None
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
+        # TODO : Add total for each cart item 
         cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
