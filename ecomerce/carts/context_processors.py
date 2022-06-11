@@ -10,6 +10,6 @@ def counter(request):
         if cart.exists():
             cart_items = CartItem.objects.filter(cart=cart.first())
         for cart_item in cart_items:
-            cart_count = cart_count + cart_item.quantity
+            cart_count += cart_item.quantity
     
     return dict(cart_count=cart_count)
