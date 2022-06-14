@@ -1,7 +1,8 @@
 from itertools import product
 from multiprocessing import context
 from django.shortcuts import get_object_or_404, render, redirect
-from store.models import Product
+# from ecomerce.store.models import variation
+from store.models import Product,variation
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from carts.utils import _cart_id
@@ -15,6 +16,15 @@ from carts.utils import _cart_id
 
 def add_cart(request, product_id):
     product = Product.objects.get(id=product_id)  # get the product
+    product_variation = []
+    if request.method =="POST":
+        for key, value in request.POST.items():
+            try:
+                variation = variation.objects.get(product = product , variation_category__iexact=key,variant_value__iexact=value)
+                product_variation.append(variation)
+            except:
+                pass
+
     try:
         # get the cart using cart id present in session
         cart = Cart.objects.get(cart_id=_cart_id(request))
