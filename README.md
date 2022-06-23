@@ -12,6 +12,7 @@ USE full Commands
 
 ### TODO
 
-- Home page update [Assignment]
+- Home page update [Assignment][Done]
 - 'Add to cart' link update on store page [Done]
 - Showing Total Amount for each Product in cart
+- Nul vs Blank in models[Assignment]

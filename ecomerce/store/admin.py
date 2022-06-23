@@ -1,5 +1,5 @@
 from django.contrib import admin
-from store.models import Product,variation
+from store.models import Product,Variation
 
 # Register your models here.
 
@@ -15,4 +15,4 @@ class variationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product,ProductAdmin)
-admin.site.register(variation, variationAdmin)
+admin.site.register(Variation, variationAdmin)

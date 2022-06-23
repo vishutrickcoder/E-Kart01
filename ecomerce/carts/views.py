@@ -2,7 +2,7 @@ from itertools import product
 from multiprocessing import context
 from django.shortcuts import get_object_or_404, render, redirect
 # from ecomerce.store.models import variation
-from store.models import Product,variation
+from store.models import Product,Variation
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from carts.utils import _cart_id
@@ -20,7 +20,7 @@ def add_cart(request, product_id):
     if request.method =="POST":
         for key, value in request.POST.items():
             try:
-                variation = variation.objects.get(product = product , variation_category__iexact=key,variant_value__iexact=value)
+                variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value__iexact=value)
                 product_variation.append(variation)
             except:
                 pass
@@ -28,23 +28,51 @@ def add_cart(request, product_id):
     try:
         # get the cart using cart id present in session
         cart = Cart.objects.get(cart_id=_cart_id(request))
+        
     except Cart.DoesNotExist:
         cart = Cart.objects.create(
             cart_id=_cart_id(request)
         )
+        
         cart.save()
+    
+    cart_item_exists = CartItem.objects.filter(product=product , cart=cart).exists()
+    
+    if cart_item_exists:
+        cart_item = CartItem.objects.filter(product=product, cart=cart)
 
-    try:
-        cart_item = CartItem.objects.get(product=product, cart=cart)
-        cart_item.quantity += 1
-        cart_item.save()
-    except CartItem.DoesNotExist:
+        ex_var_list = []
+        var_ids = []
+
+        for item in cart_item:
+            existing_variation = item.variations.all().order_by("variation_category")
+            ex_var_list.append(list(existing_variation))
+            var_ids.append(item.id)
+
+        if product_variation in ex_var_list:
+            index = ex_var_list.index(product_variation)
+            item_id = var_ids[index]
+            item = CartItem.objects.get(product=product , id=item_id)
+            item.quantity +=1
+            item.save()
+        else:
+            item =CartItem.objects.get(product=product, quantity=1 , cart=cart)
+            if len(product_variation) > 0:
+                item.variations.clear()
+                item.variations.add(product_variation)
+            item.save()
+    else:
         cart_item = CartItem.objects.create(
-            product=product,
-            quantity=1,
-            cart=cart,
+            product = product,
+            quantity = 1,
+            cart = cart,
         )
+        if len(product_variation) > 0:
+            cart_item.variations.clear()
+            cart_item.variations.add(*product_variation)
         cart_item.save()
+
+   #Save in NOTePAD in courses
     return redirect('ecom-cart')
 
 # This function used for adding item in cart and intially it is 0

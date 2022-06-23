@@ -26,6 +26,7 @@ admin.site.index_title = "Welcome to E-com Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/',include('accounts.urls')),
     path("",include("home.urls")),
     path("store/",include("store.urls")),
     path("cart/", include("carts.urls"))
